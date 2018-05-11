@@ -163,12 +163,12 @@ public class Client {
             return this;
         }
 
-        public Builder setUser(final User user) {
+        public Builder setUser(User user) {
             client.setUser(user);
             return this;
         }
 
-        public Builder setMeals(final List<Meal> meals) {
+        public Builder setMeals(List<Meal> meals) {
             client.setMeals(meals);
             return this;
         }
