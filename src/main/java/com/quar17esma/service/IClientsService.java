@@ -10,6 +10,4 @@ public interface IClientsService {
 
     Client getClientByEmail(String email);
 
-    List<Client> getClientsWithUnpaidOrders();
-
 }
