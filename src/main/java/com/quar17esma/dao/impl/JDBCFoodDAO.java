@@ -168,7 +168,7 @@ public class JDBCFoodDAO implements FoodDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "INSERT INTO goods (" +
+                             "INSERT INTO food (" +
                                      "name, carbs, protein, fat, kcal) " +
                                      "VALUES(?, ?, ?, ?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {

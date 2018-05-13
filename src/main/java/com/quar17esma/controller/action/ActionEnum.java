@@ -66,16 +66,16 @@ public enum ActionEnum {
 //            this.command = new DeleteGood();
 //        }
 //    },
-//    EDIT_GOOD {
-//        {
-//            this.command = new EditGood();
-//        }
-//    },
-//    ADD_GOOD {
-//        {
-//            this.command = new AddGood();
-//        }
-//    },
+    EDIT_FOOD {
+        {
+            this.command = new EditFood();
+        }
+    },
+    ADD_FOOD {
+        {
+            this.command = new AddFood();
+        }
+    },
     CHANGE_LOCALE {
         {
             this.command = new ChangeLocale();
