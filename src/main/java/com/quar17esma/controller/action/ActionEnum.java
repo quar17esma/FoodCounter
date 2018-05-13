@@ -11,11 +11,11 @@ public enum ActionEnum {
             this.command = new Login();
         }
     },
-//    LOGOUT {
-//        {
-//            this.command = new Logout();
-//        }
-//    },
+    LOGOUT {
+        {
+            this.command = new Logout();
+        }
+    },
     REGISTER_CLIENT {
         {
             this.command = new RegisterClient();
