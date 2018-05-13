@@ -16,16 +16,16 @@ public enum ActionEnum {
 //            this.command = new Logout();
 //        }
 //    },
-//    REGISTER_CLIENT {
-//        {
-//            this.command = new RegisterClient();
-//        }
-//    },
-//    EDIT_CLIENT {
-//        {
-//            this.command = new EditClient();
-//        }
-//    },
+    REGISTER_CLIENT {
+        {
+            this.command = new RegisterClient();
+        }
+    },
+    EDIT_CLIENT {
+        {
+            this.command = new EditClient();
+        }
+    },
 //    BUY_NOW {
 //        {
 //            this.command = new BuyNow();
