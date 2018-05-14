@@ -36,9 +36,9 @@
         <fmt:message var="buttonMyOrders" key="button.my.orders"/>
         <input type="submit" value="${buttonMyOrders}">
     </form>
-    <form class="headerButton" name="goodsForm" method="POST" action="./show_goods">
-        <fmt:message var="buttonGoodsList" key="button.goods.list"/>
-        <input type="submit" value="${buttonGoodsList}">
+    <form class="headerButton" name="foodsForm" method="POST" action="./show_foods">
+        <fmt:message var="buttonFoodsList" key="button.add.meal"/>
+        <input type="submit" value="${buttonFoodsList}">
     </form>
     <form class="headerButton" name="addNewFoodForm" method="POST" action="./edit_food">
         <fmt:message var="buttonAddFood" key="button.add.food"/>

@@ -56,11 +56,11 @@ public enum ActionEnum {
 //            this.command = new SendOrder();
 //        }
 //    },
-//    SHOW_GOODS {
-//        {
-//            this.command = new ShowGoods();
-//        }
-//    },
+    SHOW_FOODS {
+        {
+            this.command = new ShowFoods();
+        }
+    },
 //    DELETE_GOOD {
 //        {
 //            this.command = new DeleteGood();
