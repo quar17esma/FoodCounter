@@ -39,13 +39,14 @@ public class JDBCMealDAO implements MealDAO {
         return meals;
     }
 
-    public List<Meal> findAllByClientId(int clientId) {
+    public List<Meal> findAllByClientIdOrderByMealDateTimeDesc(int clientId) {
         List<Meal> meals = new ArrayList<>();
 
         try (PreparedStatement query = connection.prepareStatement(
                 "SELECT * FROM meal " +
                         "JOIN food ON meal.id = food.id " +
-                        "WHERE meal.client_id = ?")) {
+                        "WHERE meal.client_id = ? " +
+                        "ORDER BY meal.meal_date_time DESC")) {
             query.setInt(1, clientId);
             ResultSet rs = query.executeQuery();
 
@@ -88,10 +89,10 @@ public class JDBCMealDAO implements MealDAO {
 
     private Meal createMealWithFood(ResultSet rs) throws SQLException {
         Meal meal = new Meal.Builder()
-                .setId(rs.getInt("meals.id"))
-                .setMealDateTime(rs.getTimestamp("meals.meal_date_time").toLocalDateTime())
-                .setGram(rs.getInt("meals.gram"))
-                .setKcal(rs.getInt("meals.kcal"))
+                .setId(rs.getInt("meal.id"))
+                .setMealDateTime(rs.getTimestamp("meal.meal_date_time").toLocalDateTime())
+                .setGram(rs.getInt("meal.gram"))
+                .setKcal(rs.getInt("meal.kcal"))
                 .setFood(new Food.Builder()
                         .setId(rs.getInt("food.id"))
                         .setName(rs.getString("food.name"))

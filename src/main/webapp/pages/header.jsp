@@ -28,13 +28,9 @@
         <fmt:message var="buttonLogout" key="button.logout"/>
         <input type="submit" value="${buttonLogout}"/>
     </form>
-    <form class="headerButton" name="cartForm" method="POST" action="./show_cart">
-        <fmt:message var="buttonCart" key="button.cart"/>
-        <input type="submit" value="${buttonCart}">
-    </form>
-    <form class="headerButton" name="myOrdersForm" method="POST" action="./my_orders">
-        <fmt:message var="buttonMyOrders" key="button.my.orders"/>
-        <input type="submit" value="${buttonMyOrders}">
+    <form class="headerButton" name="myMealsForm" method="POST" action="./show_my_meals">
+        <fmt:message var="buttonMyMeals" key="button.my.meals"/>
+        <input type="submit" value="${buttonMyMeals}">
     </form>
     <form class="headerButton" name="foodsForm" method="POST" action="./show_foods">
         <fmt:message var="buttonFoodsList" key="button.add.meal"/>

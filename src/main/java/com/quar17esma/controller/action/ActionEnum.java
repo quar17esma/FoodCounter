@@ -36,36 +36,16 @@ public enum ActionEnum {
             this.command = new AddMeal();
         }
     },
-//    SHOW_CART {
-//        {
-//            this.command = new ShowCart();
-//        }
-//    },
-//    MY_ORDERS {
-//        {
-//            this.command = new MyOrders();
-//        }
-//    },
-//    PAY_ORDER {
-//        {
-//            this.command = new PayOrder();
-//        }
-//    },
-//    SEND_ORDER {
-//        {
-//            this.command = new SendOrder();
-//        }
-//    },
+    SHOW_MY_MEALS {
+        {
+            this.command = new ShowMyMeals();
+        }
+    },
     SHOW_FOODS {
         {
             this.command = new ShowFoods();
         }
     },
-//    DELETE_GOOD {
-//        {
-//            this.command = new DeleteGood();
-//        }
-//    },
     EDIT_FOOD {
         {
             this.command = new EditFood();
@@ -80,13 +60,7 @@ public enum ActionEnum {
         {
             this.command = new ChangeLocale();
         }
-    },
-//    MANAGE_CLIENTS {
-//        {
-//            this.command = new ManageClients();
-//        }
-//    },
- ;
+    };
 
     Action command;
 

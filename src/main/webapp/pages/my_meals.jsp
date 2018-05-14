@@ -10,40 +10,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><fmt:message key="title.add.meal"/></title>
+    <title><fmt:message key="title.my.meals"/></title>
 </head>
 <body>
 
+<div>
     <jsp:include page="/pages/header.jsp"/>
+</div>
 
-    <c:if test="${food != null}">
+<div>
+    <c:forEach items="${meals}" var="meal">
+
         <div class="field">
-            <label><fmt:message key="label.name"/></label>
-            <c:out value="${food.name}"/>
+            <b><c:out value="${meal.food.name}"/></b>
         </div>
         <div class="field">
             <label><fmt:message key="label.carbs"/></label>
-            <c:out value="${food.carbs}"/>
+            <c:out value="${meal.food.carbs}"/>
             <label><fmt:message key="label.protein"/></label>
-            <c:out value="${food.protein}"/>
+            <c:out value="${meal.food.protein}"/>
             <label><fmt:message key="label.fat"/></label>
-            <c:out value="${food.fat}"/>
+            <c:out value="${meal.food.fat}"/>
         </div>
         <div class="field">
-            <c:out value="${food.kcal}"/>
+            <c:out value="${meal.kcal}"/>
             <label><fmt:message key="label.kcal"/></label>
+            <c:out value="${meal.gram}"/>
+            <label><fmt:message key="label.gram"/></label>
         </div>
+        <br>
+    </c:forEach>
 
-        <form name="addMealForm" method="POST" action="./add_meal">
-            <input type="hidden" name="foodId" value="${food.id}">
-            <input type="number" min="0" step="1" name="gram" value="${meal.gram}"
-                   required="required">
-
-            <fmt:message var="buttonAddMeal" key="button.add.meal"/>
-            <input class="button" type="submit" value="${buttonAddMeal}">
-        </form>
-        <br/>
-    </c:if>
+</div>
 
 </body>
 </html>
