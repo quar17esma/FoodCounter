@@ -8,4 +8,6 @@ public interface IMealService {
 
     List<Meal> getMealsByClientId(int clientId);
 
+    void addMeal(Meal meal);
+
 }

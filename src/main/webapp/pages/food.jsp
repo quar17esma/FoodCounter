@@ -24,14 +24,15 @@
     <div>
         <c:out value="${successAddFoodMessage}"/>
         <c:out value="${successDeleteFoodMessage}"/>
-        <br>
     </div>
     <div>
         <form action="">
             <label><fmt:message key="label.search.food"/></label>
             <input type="search" name="foodSearch">
-            <input type="submit">
+            <fmt:message var="buttonSearch" key="button.search"/>
+            <input type="submit" value="${buttonSearch}">
         </form>
+        <br>
     </div>
     <div>
         <c:forEach items="${foods}" var="food">
@@ -51,7 +52,7 @@
                 <label><fmt:message key="label.kcal"/></label>
             </div>
             <div class="field">
-                <form class="button" name="addMealForm" method="POST" action="./add_meal">
+                <form class="button" name="editMealForm" method="POST" action="./edit_meal">
                     <input type="hidden" name="foodId" value="${food.id}">
                     <fmt:message var="addMealButton" key="button.add.meal"/>
                     <input type="submit" value="${addMealButton}">

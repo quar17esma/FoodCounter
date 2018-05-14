@@ -23,8 +23,8 @@ public class JDBCMealDAO implements MealDAO {
         List<Meal> meals = new ArrayList<>();
 
         try (PreparedStatement query = connection.prepareStatement(
-                "SELECT * FROM meals " +
-                        "JOIN food ON meals.id = food.id")) {
+                "SELECT * FROM meal " +
+                        "JOIN food ON meal.id = food.id")) {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
@@ -43,9 +43,9 @@ public class JDBCMealDAO implements MealDAO {
         List<Meal> meals = new ArrayList<>();
 
         try (PreparedStatement query = connection.prepareStatement(
-                "SELECT * FROM meals " +
-                        "JOIN food ON meals.id = food.id " +
-                        "WHERE meals.client_id = ?")) {
+                "SELECT * FROM meal " +
+                        "JOIN food ON meal.id = food.id " +
+                        "WHERE meal.client_id = ?")) {
             query.setInt(1, clientId);
             ResultSet rs = query.executeQuery();
 
@@ -68,9 +68,9 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "SELECT * FROM meals " +
-                                     "JOIN food ON meals.id = food.id " +
-                                     "WHERE meals.id = ?")) {
+                             "SELECT * FROM meal " +
+                                     "JOIN food ON meal.id = food.id " +
+                                     "WHERE meal.id = ?")) {
             query.setInt(1, id);
             ResultSet rs = query.executeQuery();
 
@@ -111,7 +111,7 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "UPDATE meals " +
+                             "UPDATE meal " +
                                      "SET gram = ?, kcal = ?, meal_date_time = ? " +
                                      "WHERE id = ?")) {
             query.setInt(1, meal.getGram());
@@ -136,7 +136,7 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "DELETE FROM meals " +
+                             "DELETE FROM meal " +
                                      "WHERE id = ?")) {
             query.setInt(1, id);
             query.executeUpdate();
@@ -156,7 +156,7 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "INSERT INTO Meals (meal_date_time, food_id, gram, kcal, client_id) " +
+                             "INSERT INTO meal (meal_date_time, food_id, gram, kcal, client_id) " +
                                      "VALUES(?, ?, ?, ?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {
 

@@ -26,16 +26,16 @@ public enum ActionEnum {
             this.command = new EditClient();
         }
     },
-//    BUY_NOW {
-//        {
-//            this.command = new BuyNow();
-//        }
-//    },
-//    ADD_TO_ORDER {
-//        {
-//            this.command = new AddToOrder();
-//        }
-//    },
+    EDIT_MEAL {
+        {
+            this.command = new EditMeal();
+        }
+    },
+    ADD_MEAL {
+        {
+            this.command = new AddMeal();
+        }
+    },
 //    SHOW_CART {
 //        {
 //            this.command = new ShowCart();

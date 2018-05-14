@@ -52,4 +52,16 @@ public class MealService extends Service implements IMealService {
 
         return meals;
     }
+
+    @Override
+    public void addMeal(Meal meal) {
+        try (Connection connection = connectionPool.getConnection();
+             MealDAO mealDAO = factory.createMealDAO(connection)) {
+            connection.setAutoCommit(true);
+            mealDAO.insert(meal);
+        } catch (Exception e) {
+//            LOGGER.error("Fail to add food", e);
+            throw new RuntimeException(e);
+        }
+    }
 }
