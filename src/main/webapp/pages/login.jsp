@@ -32,9 +32,9 @@
 </div>
 <div>
     <form name="loginForm" method="POST" action="${pageContext.request.contextPath}/rest/login">
-        <label><fmt:message key="label.login"/></label>
+        <label><fmt:message key="label.email"/></label>
         <br/>
-        <input type="text" name="login" value=""/>
+        <input type="text" name="email" value=""/>
         <br/>
         <label><fmt:message key="label.password"/></label>
         <br/>

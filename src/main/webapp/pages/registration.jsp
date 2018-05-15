@@ -21,7 +21,7 @@
     <form name="registrationForm" method="POST" action="./register_client">
         <input type="hidden" name="action" value="register_client"/>
 
-        <label><fmt:message key="label.login"/></label>
+        <label><fmt:message key="label.email"/></label>
         <br/>
         <input type="text" name="login" value="${login}"/>
         <c:out value="${errorBusyEmailMessage}"/>

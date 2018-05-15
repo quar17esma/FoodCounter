@@ -32,11 +32,11 @@ public class LoginService extends Service implements ILoginService {
         return Holder.INSTANCE;
     }
 
-    public Client login(String login, String password) throws LoginException {
-        if (checkLogin(login, password)) {
-            return clientsService.getClientByEmail(login);
+    public Client login(String email, String password) throws LoginException {
+        if (checkLogin(email, password)) {
+            return clientsService.getClientByEmail(email);
         } else {
-            throw new LoginException("Fail to login", login);
+            throw new LoginException("Fail to login", email);
         }
     }
 

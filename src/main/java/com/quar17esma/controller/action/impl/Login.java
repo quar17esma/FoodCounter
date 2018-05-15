@@ -33,11 +33,11 @@ public class Login implements Action {
             request.getSession().setAttribute("locale", locale);
         }
 
-        String login = request.getParameter("login");
+        String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         try {
-            Client client = loginService.login(login, password);
+            Client client = loginService.login(email, password);
             request.getSession().setAttribute("client", client);
             page = ConfigurationManager.getProperty("path.page.welcome");
 
