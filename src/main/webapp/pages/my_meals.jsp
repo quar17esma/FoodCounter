@@ -44,14 +44,14 @@
         <div class="field">
             <b><c:out value="${meal.food.name}"/></b>
         </div>
-        <div class="field">
-            <label><fmt:message key="label.carbs"/></label>
-            <c:out value="${meal.food.carbs}"/>
-            <label><fmt:message key="label.protein"/></label>
-            <c:out value="${meal.food.protein}"/>
-            <label><fmt:message key="label.fat"/></label>
-            <c:out value="${meal.food.fat}"/>
-        </div>
+        <%--<div class="field">--%>
+            <%--<label><fmt:message key="label.carbs"/></label>--%>
+            <%--<c:out value="${meal.food.carbs}"/>--%>
+            <%--<label><fmt:message key="label.protein"/></label>--%>
+            <%--<c:out value="${meal.food.protein}"/>--%>
+            <%--<label><fmt:message key="label.fat"/></label>--%>
+            <%--<c:out value="${meal.food.fat}"/>--%>
+        <%--</div>--%>
         <div class="field">
             <c:out value="${meal.kcal}"/>
             <label><fmt:message key="label.kcal"/></label>
