@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt" %>
-<%--<%@ taglib prefix="ctg" uri="customtags" %>--%>
 <fmt:setLocale value="en_US"/>
 <c:if test="${pageContext.session.getAttribute('locale') == 'ru_RU'}">
     <fmt:setLocale value="ru_RU"/>

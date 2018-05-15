@@ -23,12 +23,12 @@
         <location>/pages/error_page.jsp</location>
     </error-page>
 
-    <!--<jsp-config>-->
-        <!--<taglib>-->
-            <!--<taglib-uri>customtags</taglib-uri>-->
-            <!--<taglib-location>/WEB-INF/tld/custom.tld</taglib-location>-->
-        <!--</taglib>-->
-    <!--</jsp-config>-->
+    <jsp-config>
+        <taglib>
+            <taglib-uri>customtags</taglib-uri>
+            <taglib-location>/WEB-INF/tld/custom.tld</taglib-location>
+        </taglib>
+    </jsp-config>
 
     <resource-ref>
         <description>MySQL DB Connection Pool</description>
