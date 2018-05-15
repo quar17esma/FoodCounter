@@ -35,7 +35,7 @@
 
         <form name="addMealForm" method="POST" action="./add_meal">
             <input type="hidden" name="foodId" value="${food.id}">
-            <input type="number" min="0" step="1" name="gram" value="${meal.gram}"
+            <input type="number" min="0" step="10" name="gram" value="${meal.gram}"
                    required="required">
 
             <fmt:message var="buttonAddMeal" key="button.add.meal"/>
