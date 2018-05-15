@@ -8,6 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 public class EditClient implements Action {
     @Override
     public String execute(HttpServletRequest request) {
-        return ConfigurationManager.getProperty("path.page.registration");
+        return ConfigurationManager.getProperty("path.page.edit.client");
     }
 }

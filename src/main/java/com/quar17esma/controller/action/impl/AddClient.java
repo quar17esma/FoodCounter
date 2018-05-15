@@ -15,16 +15,16 @@ import com.quar17esma.service.impl.ClientsService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
-public class RegisterClient implements Action {
+public class AddClient implements Action {
     private IClientsService clientsService;
     private InputClientChecker checker;
 
-    public RegisterClient() {
+    public AddClient() {
         this.clientsService = ClientsService.getInstance();
         this.checker = new InputClientChecker();
     }
 
-    public RegisterClient(IClientsService clientsService, InputClientChecker checker) {
+    public AddClient(IClientsService clientsService, InputClientChecker checker) {
         this.clientsService = clientsService;
         this.checker = checker;
     }
@@ -55,7 +55,7 @@ public class RegisterClient implements Action {
         } else {
             request.setAttribute("errorRegistrationMessage",
                     LabelManager.getProperty("message.error.wrong.data", locale));
-            page = ConfigurationManager.getProperty("path.page.registration");
+            page = ConfigurationManager.getProperty("path.page.edit.client");
         }
 
         return page;
@@ -92,14 +92,12 @@ public class RegisterClient implements Action {
             request.setAttribute("login", client.getUser().getEmail());
             request.setAttribute("height", client.getHeight());
             request.setAttribute("weight", client.getWeight());
-//            request.setAttribute("gender", client.getGender().toString());
-//            request.setAttribute("lifestyle", client.getLifestyle().toString());
             request.setAttribute("birthDate", client.getBirthDate());
 
             request.setAttribute("errorBusyEmailMessage",
                     LabelManager.getProperty("message.error.busy.email", locale));
 
-            page = ConfigurationManager.getProperty("path.page.registration");
+            page = ConfigurationManager.getProperty("path.page.edit.client");
         }
 
         return page;
