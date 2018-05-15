@@ -39,13 +39,6 @@
         <fmt:message var="buttonAddFood" key="button.add.food"/>
         <input type="submit" value="${buttonAddFood}">
     </form>
-    <%--For ADMIN--%>
-    <c:if test="${sessionScope.client.user.role == 'ADMIN'}">
-        <form class="headerButton" name="manageClientsForm" method="POST" action="./manage_clients">
-            <fmt:message var="buttonManageClients" key="button.manage.clients"/>
-            <input type="submit" value="${buttonManageClients}">
-        </form>
-    </c:if>
     <br/>
     <hr/>
 </div>

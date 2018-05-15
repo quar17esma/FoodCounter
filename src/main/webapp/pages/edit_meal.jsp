@@ -17,8 +17,7 @@
 
     <c:if test="${food != null}">
         <div class="field">
-            <label><fmt:message key="label.name"/></label>
-            <c:out value="${food.name}"/>
+            <b><c:out value="${food.name}"/></b>
         </div>
         <div class="field">
             <label><fmt:message key="label.carbs"/></label>
