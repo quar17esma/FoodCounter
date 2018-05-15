@@ -1,10 +1,10 @@
 package com.quar17esma.entity;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class Meal {
     private int id;
-    private LocalDateTime mealDateTime;
+    private LocalDate mealDate;
     private Client client;
     private Food food;
     private int gram;
@@ -21,12 +21,12 @@ public class Meal {
         this.id = id;
     }
 
-    public LocalDateTime getMealDateTime() {
-        return mealDateTime;
+    public LocalDate getMealDate() {
+        return mealDate;
     }
 
-    public void setMealDateTime(LocalDateTime mealDateTime) {
-        this.mealDateTime = mealDateTime;
+    public void setMealDate(LocalDate mealDate) {
+        this.mealDate = mealDate;
     }
 
     public Client getClient() {
@@ -65,7 +65,7 @@ public class Meal {
     public String toString() {
         return "Meal{" +
                 "id=" + id +
-                ", mealDateTime=" + mealDateTime +
+                ", mealDate=" + mealDate +
                 ", client=" + client +
                 ", food=" + food +
                 ", gram=" + gram +
@@ -89,8 +89,8 @@ public class Meal {
             return this;
         }
 
-        public Builder setMealDateTime(LocalDateTime mealDateTime) {
-            meal.setMealDateTime(mealDateTime);
+        public Builder setMealDate(LocalDate mealDate) {
+            meal.setMealDate(mealDate);
             return this;
         }
 

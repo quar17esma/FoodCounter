@@ -5,9 +5,9 @@ import com.quar17esma.entity.Food;
 import com.quar17esma.entity.Meal;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.*;
 
 public class JDBCMealDAO implements MealDAO {
 //    private static final Logger LOGGER = Logger.getLogger(JDBCMealDAO.class);
@@ -46,7 +46,7 @@ public class JDBCMealDAO implements MealDAO {
                 "SELECT * FROM meal " +
                         "JOIN food ON meal.id = food.id " +
                         "WHERE meal.client_id = ? " +
-                        "ORDER BY meal.meal_date_time DESC")) {
+                        "ORDER BY meal.meal_date DESC")) {
             query.setInt(1, clientId);
             ResultSet rs = query.executeQuery();
 
@@ -60,6 +60,11 @@ public class JDBCMealDAO implements MealDAO {
         }
 
         return meals;
+    }
+
+    @Override
+    public List<Meal> findAllByClientIdAndMealDate(int clientId, LocalDate mealDate) {
+        return null;
     }
 
     @Override
@@ -90,7 +95,7 @@ public class JDBCMealDAO implements MealDAO {
     private Meal createMealWithFood(ResultSet rs) throws SQLException {
         Meal meal = new Meal.Builder()
                 .setId(rs.getInt("meal.id"))
-                .setMealDateTime(rs.getTimestamp("meal.meal_date_time").toLocalDateTime())
+                .setMealDate(rs.getDate("meal.meal_date").toLocalDate())
                 .setGram(rs.getInt("meal.gram"))
                 .setKcal(rs.getInt("meal.kcal"))
                 .setFood(new Food.Builder()
@@ -113,11 +118,11 @@ public class JDBCMealDAO implements MealDAO {
         try (PreparedStatement query =
                      connection.prepareStatement(
                              "UPDATE meal " +
-                                     "SET gram = ?, kcal = ?, meal_date_time = ? " +
+                                     "SET gram = ?, kcal = ?, meal_date = ? " +
                                      "WHERE id = ?")) {
             query.setInt(1, meal.getGram());
             query.setInt(2, meal.getKcal());
-            query.setTimestamp(3, Timestamp.valueOf(meal.getMealDateTime()));
+            query.setDate(3, Date.valueOf(meal.getMealDate()));
             query.setInt(4, meal.getId());
 
             query.executeUpdate();
@@ -157,11 +162,11 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query =
                      connection.prepareStatement(
-                             "INSERT INTO meal (meal_date_time, food_id, gram, kcal, client_id) " +
+                             "INSERT INTO meal (meal_date, food_id, gram, kcal, client_id) " +
                                      "VALUES(?, ?, ?, ?, ?)",
                              Statement.RETURN_GENERATED_KEYS)) {
 
-            query.setTimestamp(1, Timestamp.valueOf(meal.getMealDateTime()));
+            query.setDate(1, Date.valueOf(meal.getMealDate()));
             query.setInt(2, meal.getFood().getId());
             query.setInt(3,meal.getGram());
             query.setInt(4,meal.getKcal());
