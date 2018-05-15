@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.util.Optional;
 
 public class ClientsService extends Service implements IClientsService {
-//    private static final Logger LOGGER = Logger.getLogger(ClientsService.class);
+    private static final Logger LOGGER = Logger.getLogger(ClientsService.class);
 
     private ClientsService(DaoFactory factory, ConnectionPool connectionPool) {
         super(factory, connectionPool);
@@ -52,7 +52,7 @@ public class ClientsService extends Service implements IClientsService {
         } catch (BusyEmailException e) {
             throw new BusyEmailException(e);
         } catch (Exception e) {
-//            LOGGER.error("Fail to register client", e);
+            LOGGER.error("Fail to register client: " + client, e);
             throw new RuntimeException(e);
         }
     }
@@ -71,7 +71,7 @@ public class ClientsService extends Service implements IClientsService {
             connection.commit();
             connection.setAutoCommit(true);
         } catch (Exception e) {
-//            LOGGER.error("Fail to get client by email", e);
+            LOGGER.error("Fail to get client with email = " + email, e);
             throw new RuntimeException(e);
         }
 

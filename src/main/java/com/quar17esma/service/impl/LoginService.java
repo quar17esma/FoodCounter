@@ -14,7 +14,7 @@ import java.sql.Connection;
 import java.util.Optional;
 
 public class LoginService extends Service implements ILoginService {
-//    private static final Logger LOGGER = Logger.getLogger(LoginService.class);
+    private static final Logger LOGGER = Logger.getLogger(LoginService.class);
 
     private IClientsService clientsService;
 
@@ -40,23 +40,25 @@ public class LoginService extends Service implements ILoginService {
         }
     }
 
-    private boolean checkLogin(String login, String password) {
+    private boolean checkLogin(String email, String password) {
         boolean result = false;
 
-        if (login != null &&
+        if (email != null &&
                 password != null &&
-                !login.isEmpty() &&
+                !email.isEmpty() &&
                 !password.isEmpty()) {
 
             try(Connection connection = connectionPool.getConnection();
                 UserDAO userDAO = factory.createUserDAO(connection)) {
                 connection.setAutoCommit(true);
-                Optional<User> user = userDAO.findByEmail(login);
+
+                Optional<User> user = userDAO.findByEmail(email);
                 if (user.isPresent()) {
                     result = user.get().getPassword().equals(password);
                 }
+
             } catch (Exception e) {
-//                LOGGER.error("Fail to find user by email", e);
+                LOGGER.error("Fail to find user with email = " + email, e);
                 throw new RuntimeException(e);
             }
         }

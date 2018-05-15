@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JDBCClientDAO implements ClientDAO {
-//    private static final Logger LOGGER = Logger.getLogger(JDBCClientDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(JDBCClientDAO.class);
 
     private Connection connection;
 
@@ -36,7 +36,7 @@ public class JDBCClientDAO implements ClientDAO {
                 clients.add(client);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find clients", ex);
+            LOGGER.error("Fail to find clients", ex);
             throw new RuntimeException(ex);
         }
         return clients;
@@ -59,7 +59,7 @@ public class JDBCClientDAO implements ClientDAO {
                 result = Optional.of(client);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find client by id", ex);
+            LOGGER.error("Fail to find client by id, id = " + id, ex);
             throw new RuntimeException(ex);
         }
         return result;
@@ -107,7 +107,7 @@ public class JDBCClientDAO implements ClientDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to update client", ex);
+            LOGGER.error("Fail to update client with id: " + client.getId(), ex);
             throw new RuntimeException(ex);
         }
 
@@ -127,7 +127,7 @@ public class JDBCClientDAO implements ClientDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to delete client", ex);
+            LOGGER.error("Fail to delete client with id = " + id, ex);
             throw new RuntimeException(ex);
         }
 
@@ -158,7 +158,7 @@ public class JDBCClientDAO implements ClientDAO {
                 client.setId(result);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to insert client", ex);
+            LOGGER.error("Fail to insert client: " + client.toString(), ex);
             throw new RuntimeException(ex);
         }
 

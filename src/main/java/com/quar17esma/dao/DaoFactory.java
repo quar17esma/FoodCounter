@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import java.sql.Connection;
 
 public abstract class DaoFactory {
-//    private static final Logger LOGGER = Logger.getLogger(DaoFactory.class);
-//
+    private static final Logger LOGGER = Logger.getLogger(DaoFactory.class);
+
     public abstract ClientDAO createClientDAO(Connection connection);
     public abstract UserDAO createUserDAO(Connection connection);
     public abstract FoodDAO createFoodDAO(Connection connection);
@@ -18,7 +18,7 @@ public abstract class DaoFactory {
         try {
             factory = (DaoFactory) Class.forName(className).newInstance();
         } catch (Exception e) {
-//            LOGGER.error("Fail to get DaoFactory", e);
+            LOGGER.error("Fail to get DaoFactory", e);
             throw new RuntimeException(e);
         }
         return factory;

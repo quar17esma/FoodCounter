@@ -10,7 +10,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionPool {
-//    private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = Logger.getLogger(ConnectionPool.class);
     private static final String DATASOURCE_NAME = "jdbc/food_counter";
     private static DataSource dataSource;
 
@@ -20,7 +20,7 @@ public class ConnectionPool {
             Context envContext = (Context) initContext.lookup("java:/comp/env");
             dataSource = (DataSource) envContext.lookup(DATASOURCE_NAME);
         } catch (NamingException e) {
-//            LOGGER.error("Fail to initialize datasource", e);
+            LOGGER.error("Fail to initialize datasource", e);
             throw new RuntimeException(e);
         }
     }
@@ -37,7 +37,7 @@ public class ConnectionPool {
         try {
             return dataSource.getConnection();
         } catch (SQLException e) {
-//            LOGGER.error("Fail to get connection", e);
+            LOGGER.error("Fail to get connection", e);
             throw new RuntimeException(e);
         }
     }

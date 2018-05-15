@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class JDBCFoodDAO implements FoodDAO {
-//    private static final Logger LOGGER = Logger.getLogger(JDBCFoodDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(JDBCFoodDAO.class);
 
     private Connection connection;
 
@@ -32,7 +32,7 @@ public class JDBCFoodDAO implements FoodDAO {
                 foods.add(food);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find foods", ex);
+            LOGGER.error("Fail to find foods", ex);
             throw new RuntimeException(ex);
         }
 
@@ -55,7 +55,8 @@ public class JDBCFoodDAO implements FoodDAO {
                 foods.add(food);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find foods", ex);
+            LOGGER.error("Fail to find foods by Page, page = " + page +
+                    ", foodsOnPage = " + foodsOnPage, ex);
             throw new RuntimeException(ex);
         }
 
@@ -72,7 +73,7 @@ public class JDBCFoodDAO implements FoodDAO {
                 foodCounter = rs.getInt("COUNT(id)");
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find foods", ex);
+            LOGGER.error("Fail to count foods", ex);
             throw new RuntimeException(ex);
         }
         return foodCounter;
@@ -95,7 +96,7 @@ public class JDBCFoodDAO implements FoodDAO {
                 result = Optional.of(food);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find food by id", ex);
+            LOGGER.error("Fail to find food with id = " + id, ex);
             throw new RuntimeException(ex);
         }
 
@@ -135,7 +136,7 @@ public class JDBCFoodDAO implements FoodDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to update food", ex);
+            LOGGER.error("Fail to update food with id = " + food.getId(), ex);
             throw new RuntimeException(ex);
         }
 
@@ -155,7 +156,7 @@ public class JDBCFoodDAO implements FoodDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to delete food", ex);
+            LOGGER.error("Fail to delete food with id = " + id, ex);
             throw new RuntimeException(ex);
         }
 
@@ -186,7 +187,7 @@ public class JDBCFoodDAO implements FoodDAO {
                 food.setId(result);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to insert food", ex);
+            LOGGER.error("Fail to insert food: " + food.toString(), ex);
             throw new RuntimeException(ex);
         }
 

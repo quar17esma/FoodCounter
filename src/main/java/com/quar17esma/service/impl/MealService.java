@@ -5,13 +5,14 @@ import com.quar17esma.dao.DaoFactory;
 import com.quar17esma.dao.MealDAO;
 import com.quar17esma.entity.Meal;
 import com.quar17esma.service.IMealService;
+import org.apache.log4j.Logger;
 
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.List;
 
 public class MealService extends Service implements IMealService {
-//    private static final Logger LOGGER = Logger.getLogger(OrdersService.class);
+    private static final Logger LOGGER = Logger.getLogger(MealService.class);
 
     private MealService(DaoFactory factory, ConnectionPool connectionPool) {
         super(factory, connectionPool);
@@ -35,7 +36,7 @@ public class MealService extends Service implements IMealService {
             meals = mealDAO.findAllByClientIdOrderByMealDateTimeDesc(clientId);
 
         } catch (Exception e) {
-//            LOGGER.error("Fail to get meals by client id", e);
+            LOGGER.error("Fail to get meals with clientId = " + clientId, e);
             throw new RuntimeException(e);
         }
 
@@ -53,7 +54,8 @@ public class MealService extends Service implements IMealService {
             meals = mealDAO.findAllByClientIdAndMealDate(clientId, date);
 
         } catch (Exception e) {
-//            LOGGER.error("Fail to get meals by client id", e);
+            LOGGER.error("Fail to get meals with clientId = " + clientId +
+                    ", date = " + date, e);
             throw new RuntimeException(e);
         }
 
@@ -65,9 +67,11 @@ public class MealService extends Service implements IMealService {
         try (Connection connection = connectionPool.getConnection();
              MealDAO mealDAO = factory.createMealDAO(connection)) {
             connection.setAutoCommit(true);
+
             mealDAO.insert(meal);
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to add food", e);
+            LOGGER.error("Fail to add meal: " + meal, e);
             throw new RuntimeException(e);
         }
     }

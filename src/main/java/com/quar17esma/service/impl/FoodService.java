@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class FoodService extends Service implements IFoodService {
-//    private static final Logger LOGGER = Logger.getLogger(FoodService.class);
+    private static final Logger LOGGER = Logger.getLogger(FoodService.class);
 
     private FoodService(DaoFactory factory, ConnectionPool connectionPool) {
         super(factory, connectionPool);
@@ -34,7 +34,7 @@ public class FoodService extends Service implements IFoodService {
             connection.setAutoCommit(true);
             foodList = foodDAO.findAll();
         } catch (Exception e) {
-//            LOGGER.error("Fail to get all food", e);
+            LOGGER.error("Fail to get all food", e);
             throw new RuntimeException(e);
         }
 
@@ -49,7 +49,8 @@ public class FoodService extends Service implements IFoodService {
             connection.setAutoCommit(true);
             foodList = foodDAO.findByPage(page, foodOnPage);
         } catch (Exception e) {
-//            LOGGER.error("Fail to get all foodList", e);
+            LOGGER.error("Fail to get all food by page, page = " + page +
+                    ", foodOnPage = " + foodOnPage, e);
             throw new RuntimeException(e);
         }
 
@@ -58,36 +59,47 @@ public class FoodService extends Service implements IFoodService {
 
     public int getAllFoodQuantity() {
         int foodCounter;
+
         try (Connection connection = connectionPool.getConnection();
              FoodDAO foodDAO = factory.createFoodDAO(connection)) {
             connection.setAutoCommit(true);
+
             foodCounter = foodDAO.countAllFood();
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to get all foods", e);
+            LOGGER.error("Fail to get all food quantity", e);
             throw new RuntimeException(e);
         }
+
         return foodCounter;
     }
 
     public Food getFoodById(int foodId) {
+        Food food = null;
+
         try(Connection connection = connectionPool.getConnection();
             FoodDAO foodDAO = factory.createFoodDAO(connection)) {
             connection.setAutoCommit(true);
-            Optional<Food> food = foodDAO.findById(foodId);
-            return food.get();
+
+            food = foodDAO.findById(foodId).get();
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to find food by id", e);
+            LOGGER.error("Fail to find food with id = " + foodId, e);
             throw new RuntimeException(e);
         }
+
+        return food;
     }
 
     public void deleteFoodById(int foodId) {
         try (Connection connection = connectionPool.getConnection();
              FoodDAO foodDAO = factory.createFoodDAO(connection)) {
             connection.setAutoCommit(true);
+
             foodDAO.delete(foodId);
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to delete food", e);
+            LOGGER.error("Fail to delete food with id = " + foodId, e);
             throw new RuntimeException(e);
         }
     }
@@ -96,9 +108,11 @@ public class FoodService extends Service implements IFoodService {
         try (Connection connection = connectionPool.getConnection();
              FoodDAO foodDAO = factory.createFoodDAO(connection)) {
             connection.setAutoCommit(true);
+
             foodDAO.insert(food);
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to add food", e);
+            LOGGER.error("Fail to add food: " + food, e);
             throw new RuntimeException(e);
         }
     }
@@ -107,9 +121,11 @@ public class FoodService extends Service implements IFoodService {
         try (Connection connection = connectionPool.getConnection();
              FoodDAO foodDAO = factory.createFoodDAO(connection)) {
             connection.setAutoCommit(true);
+
             foodDAO.update(food);
+
         } catch (Exception e) {
-//            LOGGER.error("Fail to update food", e);
+            LOGGER.error("Fail to update food with id = " + food.getId(), e);
             throw new RuntimeException(e);
         }
     }

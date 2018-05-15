@@ -3,6 +3,7 @@ package com.quar17esma.dao.impl;
 import com.quar17esma.dao.MealDAO;
 import com.quar17esma.entity.Food;
 import com.quar17esma.entity.Meal;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.sql.Date;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class JDBCMealDAO implements MealDAO {
-//    private static final Logger LOGGER = Logger.getLogger(JDBCMealDAO.class);
+    private static final Logger LOGGER = Logger.getLogger(JDBCMealDAO.class);
 
     private Connection connection;
 
@@ -32,7 +33,7 @@ public class JDBCMealDAO implements MealDAO {
                 meals.add(meal);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find meals", ex);
+            LOGGER.error("Fail to find meals", ex);
             throw new RuntimeException(ex);
         }
 
@@ -55,7 +56,7 @@ public class JDBCMealDAO implements MealDAO {
                 meals.add(meal);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find meals", ex);
+            LOGGER.error("Fail to find meals with client id = " + clientId, ex);
             throw new RuntimeException(ex);
         }
 
@@ -79,7 +80,8 @@ public class JDBCMealDAO implements MealDAO {
                 meals.add(meal);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find meals", ex);
+            LOGGER.error("Fail to find meals with client id = " + clientId +
+                    ", mealDate = " + mealDate, ex);
             throw new RuntimeException(ex);
         }
 
@@ -104,7 +106,7 @@ public class JDBCMealDAO implements MealDAO {
                 result = Optional.of(meal);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to find order by id", ex);
+            LOGGER.error("Fail to find meal with id = " + id, ex);
             throw new RuntimeException(ex);
         }
 
@@ -148,7 +150,7 @@ public class JDBCMealDAO implements MealDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to update meal", ex);
+            LOGGER.error("Fail to update meal with id = " + meal.getId(), ex);
             throw new RuntimeException(ex);
         }
 
@@ -168,7 +170,7 @@ public class JDBCMealDAO implements MealDAO {
 
             result = true;
         } catch (Exception ex) {
-//            LOGGER.error("Fail to delete order", ex);
+            LOGGER.error("Fail to delete order with id = " + id, ex);
             throw new RuntimeException(ex);
         }
 
@@ -198,7 +200,7 @@ public class JDBCMealDAO implements MealDAO {
                 meal.setId(result);
             }
         } catch (Exception ex) {
-//            LOGGER.error("Fail to insert meal", ex);
+            LOGGER.error("Fail to insert meal: " + meal.toString(), ex);
             throw new RuntimeException(ex);
         }
 
