@@ -19,6 +19,12 @@
 </div>
 
 <div>
+    <label><fmt:message key="label.calorie.need"/></label>
+    <c:out value="${calories}"/>
+    <br>
+</div>
+
+<div>
     <c:forEach items="${meals}" var="meal">
 
         <div class="field">
