@@ -32,9 +32,11 @@ public class ShowMyMeals implements Action {
 
         List<Meal> meals = mealService.getMealsByClientId(client.getId());
         int calories = calorieCounter.countCalorie(client);
+        int caloriesLeft = calorieCounter.countLeftCalories(client);
 
         request.setAttribute("meals", meals);
         request.setAttribute("calories", calories);
+        request.setAttribute("caloriesLeft", caloriesLeft);
 
         return ConfigurationManager.getProperty("path.page.my.meals");
     }

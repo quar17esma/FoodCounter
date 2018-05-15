@@ -12,7 +12,7 @@ import com.quar17esma.service.impl.FoodService;
 import com.quar17esma.service.impl.MealService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public class AddMeal implements Action {
     private IMealService mealService;
@@ -42,7 +42,7 @@ public class AddMeal implements Action {
                 .setClient(client)
                 .setGram(gram)
                 .setKcal(countMealKcal(gram, food.getKcal()))
-                .setMealDateTime(LocalDateTime.now())
+                .setMealDate(LocalDate.now())
                 .build()
         );
 

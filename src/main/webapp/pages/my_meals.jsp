@@ -22,6 +22,19 @@
     <label><fmt:message key="label.calorie.need"/></label>
     <c:out value="${calories}"/>
     <br>
+
+<c:choose>
+    <c:when test="${caloriesLeft >= 0}">
+        <fmt:message var="labelCaloriesLeft" key="label.calorie.left"/>
+    </c:when>
+    <c:otherwise>
+        <fmt:message var="labelCaloriesLeft" key="label.calorie.overdose"/>
+    </c:otherwise>
+</c:choose>
+    <label><c:out value="${labelCaloriesLeft}"/></label>
+    <c:out value="${caloriesLeft}"/>
+    <br>
+    <br>
 </div>
 
 <div>

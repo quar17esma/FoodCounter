@@ -24,7 +24,7 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query = connection.prepareStatement(
                 "SELECT * FROM meal " +
-                        "JOIN food ON meal.id = food.id")) {
+                        "JOIN food ON meal.food_id = food.id")) {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
@@ -44,7 +44,7 @@ public class JDBCMealDAO implements MealDAO {
 
         try (PreparedStatement query = connection.prepareStatement(
                 "SELECT * FROM meal " +
-                        "JOIN food ON meal.id = food.id " +
+                        "JOIN food ON meal.food_id = food.id " +
                         "WHERE meal.client_id = ? " +
                         "ORDER BY meal.meal_date DESC")) {
             query.setInt(1, clientId);
@@ -64,7 +64,26 @@ public class JDBCMealDAO implements MealDAO {
 
     @Override
     public List<Meal> findAllByClientIdAndMealDate(int clientId, LocalDate mealDate) {
-        return null;
+        List<Meal> meals = new ArrayList<>();
+
+        try (PreparedStatement query = connection.prepareStatement(
+                "SELECT * FROM meal " +
+                        "JOIN food ON meal.food_id = food.id " +
+                        "WHERE meal.client_id = ? AND meal.meal_date = ?")) {
+            query.setInt(1, clientId);
+            query.setDate(2, Date.valueOf(mealDate));
+            ResultSet rs = query.executeQuery();
+
+            while (rs.next()) {
+                Meal meal = createMealWithFood(rs);
+                meals.add(meal);
+            }
+        } catch (Exception ex) {
+//            LOGGER.error("Fail to find meals", ex);
+            throw new RuntimeException(ex);
+        }
+
+        return meals;
     }
 
     @Override
@@ -75,7 +94,7 @@ public class JDBCMealDAO implements MealDAO {
         try (PreparedStatement query =
                      connection.prepareStatement(
                              "SELECT * FROM meal " +
-                                     "JOIN food ON meal.id = food.id " +
+                                     "JOIN food ON meal.food_id = food.id " +
                                      "WHERE meal.id = ?")) {
             query.setInt(1, id);
             ResultSet rs = query.executeQuery();
