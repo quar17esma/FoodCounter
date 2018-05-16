@@ -39,7 +39,7 @@ public class AddClient implements Action {
         }
 
         String name = request.getParameter("name").trim();
-        String login = request.getParameter("login").trim();
+        String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         int height = Integer.parseInt(request.getParameter("height"));
         int weight = Integer.parseInt(request.getParameter("weight"));
@@ -47,10 +47,10 @@ public class AddClient implements Action {
         Lifestyle lifestyle = Lifestyle.valueOf(request.getParameter("lifestyle").toUpperCase());
         LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"));
 
-        boolean isDataCorrect = checkInputData(name, login);
+        boolean isDataCorrect = checkInputData(name, email);
 
         if (isDataCorrect) {
-            Client client = makeClient(name, login, password, height, weight, gender, lifestyle, birthDate);
+            Client client = makeClient(name, email, password, height, weight, gender, lifestyle, birthDate);
             page = registerClient(client, request, locale);
         } else {
             request.setAttribute("errorRegistrationMessage",
@@ -61,7 +61,7 @@ public class AddClient implements Action {
         return page;
     }
 
-    private Client makeClient(String name, String login, String password,
+    private Client makeClient(String name, String email, String password,
                               int height, int weight, Gender gender,
                               Lifestyle lifestyle, LocalDate birthDate) {
         return new Client.Builder()
@@ -72,7 +72,7 @@ public class AddClient implements Action {
                 .setLifestyle(lifestyle)
                 .setBirthDate(birthDate)
                 .setUser(new User.Builder()
-                        .setEmail(login)
+                        .setEmail(email)
                         .setPassword(password)
                         .build())
                 .build();
@@ -89,7 +89,7 @@ public class AddClient implements Action {
 
         } catch (BusyEmailException e) {
             request.setAttribute("name", client.getName());
-            request.setAttribute("login", client.getUser().getEmail());
+            request.setAttribute("email", client.getUser().getEmail());
             request.setAttribute("height", client.getHeight());
             request.setAttribute("weight", client.getWeight());
             request.setAttribute("birthDate", client.getBirthDate());

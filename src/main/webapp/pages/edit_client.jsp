@@ -23,7 +23,7 @@
 
         <label><fmt:message key="label.email"/></label>
         <br/>
-        <input type="text" name="login" value="${login}" required="required"/>
+        <input type="text" name="email" value="${email}" required="required"/>
         <c:out value="${errorBusyEmailMessage}"/>
         <br/>
 
