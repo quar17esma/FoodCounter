@@ -104,4 +104,11 @@ public class CalorieCounter implements ICalorieCounter {
 
         return todayConsumedCalories;
     }
+
+    @Override
+    public int countMealKcal(int gram, int kcal) {
+        double i = (double) gram / 100.00;
+
+        return (int) (kcal * i);
+    }
 }

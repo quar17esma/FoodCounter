@@ -7,4 +7,6 @@ public interface ICalorieCounter {
     int countDailyCalorieNeed(Client client);
 
     int countTodayLeftCalories(Client client);
+
+    int countMealKcal(int gram, int kcal);
 }
