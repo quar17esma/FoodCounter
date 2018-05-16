@@ -9,4 +9,6 @@ public interface FoodDAO extends GenericDAO<Food> {
     List<Food> findByPage(int page, int goodsOnPage);
 
     int countAllFood();
+
+    List<Food> findBySearchInName(String searchString);
 }

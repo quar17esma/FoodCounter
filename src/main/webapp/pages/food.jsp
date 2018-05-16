@@ -25,13 +25,16 @@
         <c:out value="${successDeleteFoodMessage}"/>
     </div>
     <div>
-        <form action="">
+        <form name="searchForm" method="POST" action="./search_food">
             <label><fmt:message key="label.search.food"/></label>
-            <input type="search" name="foodSearch">
+            <input type="search" name="searchString" value="${searchString}">
             <fmt:message var="buttonSearch" key="button.search"/>
             <input type="submit" value="${buttonSearch}">
         </form>
         <br>
+    </div>
+    <div>
+        <c:out value="${sorryFoodNotFoundMessage}"/>
     </div>
     <div>
         <c:forEach items="${foods}" var="food">
@@ -58,19 +61,19 @@
                 </form>
             </div>
 
-            <%--For ADMIN--%>
-            <c:if test="${sessionScope.client.user.role == 'ADMIN'}">
-                <form class="button" name="goToEditGoodForm" method="POST" action="./edit_good">
-                    <input type="hidden" name="goodId" value="${food.id}">
-                    <fmt:message var="buttonEdit" key="button.edit"/>
-                    <input type="submit" value="${buttonEdit}">
-                </form>
-                <form class="button" name="deleteGoodForm" method="POST" action="./delete_good">
-                    <input type="hidden" name="goodId" value="${food.id}">
-                    <fmt:message var="buttonDelete" key="button.delete"/>
-                    <input type="submit" value="${buttonDelete}">
-                </form>
-            </c:if>
+            <%--&lt;%&ndash;For ADMIN&ndash;%&gt;--%>
+            <%--<c:if test="${sessionScope.client.user.role == 'ADMIN'}">--%>
+                <%--<form class="button" name="goToEditGoodForm" method="POST" action="./edit_good">--%>
+                    <%--<input type="hidden" name="goodId" value="${food.id}">--%>
+                    <%--<fmt:message var="buttonEdit" key="button.edit"/>--%>
+                    <%--<input type="submit" value="${buttonEdit}">--%>
+                <%--</form>--%>
+                <%--<form class="button" name="deleteGoodForm" method="POST" action="./delete_good">--%>
+                    <%--<input type="hidden" name="goodId" value="${food.id}">--%>
+                    <%--<fmt:message var="buttonDelete" key="button.delete"/>--%>
+                    <%--<input type="submit" value="${buttonDelete}">--%>
+                <%--</form>--%>
+            <%--</c:if>--%>
             <br/>
             <hr/>
         </c:forEach>

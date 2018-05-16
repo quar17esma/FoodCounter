@@ -129,4 +129,22 @@ public class FoodService extends Service implements IFoodService {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<Food> getFoodBySearchInName(String searchString) {
+        List<Food> foodList = null;
+
+        try (Connection connection = connectionPool.getConnection();
+             FoodDAO foodDAO = factory.createFoodDAO(connection)) {
+            connection.setAutoCommit(true);
+
+            foodList = foodDAO.findBySearchInName(searchString);
+
+        } catch (Exception e) {
+            LOGGER.error("Fail to get food by search in name = " + searchString, e);
+            throw new RuntimeException(e);
+        }
+
+        return foodList;
+    }
 }

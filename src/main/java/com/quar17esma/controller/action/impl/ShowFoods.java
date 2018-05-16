@@ -32,6 +32,7 @@ public class ShowFoods implements Action {
 
         request.setAttribute("foods", foods);
         request.setAttribute("pagesQuantity", pagesQuantity);
+
         return ConfigurationManager.getProperty("path.page.foods");
     }
 

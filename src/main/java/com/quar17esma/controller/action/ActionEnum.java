@@ -56,6 +56,11 @@ public enum ActionEnum {
             this.command = new AddFood();
         }
     },
+    SEARCH_FOOD {
+        {
+            this.command = new SearchFood();
+        }
+    },
     CHANGE_LOCALE {
         {
             this.command = new ChangeLocale();
