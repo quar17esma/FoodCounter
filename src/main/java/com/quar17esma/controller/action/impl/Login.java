@@ -25,10 +25,7 @@ public class Login implements Action {
     public String execute(HttpServletRequest request) {
         String page = null;
 
-        String locale = (String) request.getSession().getAttribute("locale");
-        if (locale == null) {
-            request.getSession().setAttribute("locale", LabelManager.DEFAULT_LOCALE);
-        }
+        String locale = getLocaleOrSetDefault(request);
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
@@ -41,10 +38,17 @@ public class Login implements Action {
         } catch (LoginException e) {
             request.setAttribute("errorLoginPassMessage",
                     LabelManager.getProperty("message.login.error", locale));
-
             page = ConfigurationManager.getProperty("path.page.login");
         }
 
         return page;
+    }
+
+    private String getLocaleOrSetDefault(HttpServletRequest request) {
+        String locale = (String) request.getSession().getAttribute("locale");
+        if (locale == null) {
+            request.getSession().setAttribute("locale", LabelManager.DEFAULT_LOCALE);
+        }
+        return locale;
     }
 }
