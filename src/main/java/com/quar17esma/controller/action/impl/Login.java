@@ -11,8 +11,6 @@ import com.quar17esma.service.impl.LoginService;
 import javax.servlet.http.HttpServletRequest;
 
 public class Login implements Action {
-    private static final String DEFAULT_LOCALE = "en_US";
-
     private ILoginService loginService;
 
     public Login() {
@@ -29,8 +27,7 @@ public class Login implements Action {
 
         String locale = (String) request.getSession().getAttribute("locale");
         if (locale == null) {
-            locale = DEFAULT_LOCALE;
-            request.getSession().setAttribute("locale", locale);
+            request.getSession().setAttribute("locale", LabelManager.DEFAULT_LOCALE);
         }
 
         String email = request.getParameter("email");
