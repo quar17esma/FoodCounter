@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 
@@ -37,18 +38,18 @@ public class AddMealTest {
     private Food food;
     @Mock
     private Client client;
-    @Mock
-    private ConfigurationManager configManager;
 
     @InjectMocks
     private AddMeal addMeal;
 
     @Test
     public void execute() throws Exception {
+        String page = ConfigurationManager.getProperty("path.page.welcome");
         String locale = "en_US";
         String foodId = "5";
         String gram = "300";
         int foodKcal = 80;
+        String successAddMeal = LabelManager.getProperty("message.success.add.meal", locale);
 
         when(session.getAttribute("locale")).thenReturn(locale);
         when(session.getAttribute("client")).thenReturn(client);
@@ -61,14 +62,14 @@ public class AddMealTest {
 
         when(food.getKcal()).thenReturn(foodKcal);
 
-        addMeal.execute(request);
+        String resultPage = addMeal.execute(request);
 
         verify(foodService).getFoodById(Integer.parseInt(foodId));
         verify(calorieCounter).countMealKcal(Integer.parseInt(gram), foodKcal);
         verify(mealService).addMeal(any(Meal.class));
-        verify(request).setAttribute("successAddMeal",
-                LabelManager.getProperty("message.success.add.meal", locale));
+        verify(request).setAttribute("successAddMeal", successAddMeal);
 
+        assertEquals(resultPage, page);
     }
 
 }
