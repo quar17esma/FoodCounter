@@ -60,20 +60,6 @@
                     <input type="submit" value="${addMealButton}">
                 </form>
             </div>
-
-            <%--&lt;%&ndash;For ADMIN&ndash;%&gt;--%>
-            <%--<c:if test="${sessionScope.client.user.role == 'ADMIN'}">--%>
-                <%--<form class="button" name="goToEditGoodForm" method="POST" action="./edit_good">--%>
-                    <%--<input type="hidden" name="goodId" value="${food.id}">--%>
-                    <%--<fmt:message var="buttonEdit" key="button.edit"/>--%>
-                    <%--<input type="submit" value="${buttonEdit}">--%>
-                <%--</form>--%>
-                <%--<form class="button" name="deleteGoodForm" method="POST" action="./delete_good">--%>
-                    <%--<input type="hidden" name="goodId" value="${food.id}">--%>
-                    <%--<fmt:message var="buttonDelete" key="button.delete"/>--%>
-                    <%--<input type="submit" value="${buttonDelete}">--%>
-                <%--</form>--%>
-            <%--</c:if>--%>
             <br/>
             <hr/>
         </c:forEach>
