@@ -3,6 +3,7 @@ package com.quar17esma.service.impl;
 import com.quar17esma.entity.Client;
 import com.quar17esma.entity.Meal;
 import com.quar17esma.enums.Gender;
+import com.quar17esma.enums.Lifestyle;
 import com.quar17esma.service.ICalorieCounter;
 import com.quar17esma.service.IMealService;
 
@@ -38,22 +39,22 @@ public class CalorieCounter implements ICalorieCounter {
 
 
     @Override
-    public int countCalorie(Client client) {
+    public int countDailyCalorieNeed(Client client) {
         int result = 0;
 
-        int addend = countAddend(client);
-        int age = countClientsAge(client);
-        double multiplier = countMultiplier(client);
+        int addend = countGenderAddend(client.getGender());
+        int age = countClientsAge(client.getBirthDate());
+        double multiplier = countLifestyleMultiplier(client.getLifestyle());
 
         result = (int) (((9.99 * client.getWeight()) + (6.25 * client.getHeight()) - (4.92 * age) + addend) * multiplier);
 
         return result;
     }
 
-    private double countMultiplier(Client client) {
+    private double countLifestyleMultiplier(Lifestyle lifestyle) {
         double multiplier = 0.0;
 
-        switch (client.getLifestyle()) {
+        switch (lifestyle) {
             case LAZY:
                 multiplier = LAZY_MULTIPLIER;
                 break;
@@ -68,9 +69,9 @@ public class CalorieCounter implements ICalorieCounter {
         return multiplier;
     }
 
-    private int countAddend(Client client) {
+    private int countGenderAddend(Gender gender) {
         int adder;
-        if (client.getGender().equals(Gender.MALE)){
+        if (gender.equals(Gender.MALE)){
             adder = MEN_ADDEND;
         } else {
             adder = WOMEN_ADDEND;
@@ -78,13 +79,13 @@ public class CalorieCounter implements ICalorieCounter {
         return adder;
     }
 
-    private int countClientsAge(Client client) {
-        return Period.between(client.getBirthDate(), LocalDate.now()).getYears();
+    private int countClientsAge(LocalDate birthDate) {
+        return Period.between(birthDate, LocalDate.now()).getYears();
     }
 
     @Override
-    public int countLeftCalories(Client client) {
-        int dailyNeed = countCalorie(client);
+    public int countTodayLeftCalories(Client client) {
+        int dailyNeed = countDailyCalorieNeed(client);
         int todayConsumedCalories = countTodayConsumedCalories(client);
 
         return dailyNeed - todayConsumedCalories;
