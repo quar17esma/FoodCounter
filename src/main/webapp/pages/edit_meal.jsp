@@ -17,8 +17,7 @@
 
     <c:if test="${food != null}">
         <div class="field">
-            <label><fmt:message key="label.name"/></label>
-            <c:out value="${food.name}"/>
+            <b><c:out value="${food.name}"/></b>
         </div>
         <div class="field">
             <label><fmt:message key="label.carbs"/></label>
@@ -35,7 +34,7 @@
 
         <form name="addMealForm" method="POST" action="./add_meal">
             <input type="hidden" name="foodId" value="${food.id}">
-            <input type="number" min="0" step="1" name="gram" value="${meal.gram}"
+            <input type="number" min="0" step="10" name="gram" value="${meal.gram}"
                    required="required">
 
             <fmt:message var="buttonAddMeal" key="button.add.meal"/>

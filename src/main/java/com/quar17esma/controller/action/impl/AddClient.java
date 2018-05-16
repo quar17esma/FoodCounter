@@ -15,16 +15,16 @@ import com.quar17esma.service.impl.ClientsService;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 
-public class RegisterClient implements Action {
+public class AddClient implements Action {
     private IClientsService clientsService;
     private InputClientChecker checker;
 
-    public RegisterClient() {
+    public AddClient() {
         this.clientsService = ClientsService.getInstance();
         this.checker = new InputClientChecker();
     }
 
-    public RegisterClient(IClientsService clientsService, InputClientChecker checker) {
+    public AddClient(IClientsService clientsService, InputClientChecker checker) {
         this.clientsService = clientsService;
         this.checker = checker;
     }
@@ -33,13 +33,10 @@ public class RegisterClient implements Action {
     public String execute(HttpServletRequest request) {
         String page = null;
 
-        String locale = (String) request.getSession().getAttribute("locale");
-        if (locale == null) {
-            locale = "en_US";
-        }
+        String locale = getLocaleOrSetDefault(request);
 
         String name = request.getParameter("name").trim();
-        String login = request.getParameter("login").trim();
+        String email = request.getParameter("email").trim();
         String password = request.getParameter("password").trim();
         int height = Integer.parseInt(request.getParameter("height"));
         int weight = Integer.parseInt(request.getParameter("weight"));
@@ -47,21 +44,31 @@ public class RegisterClient implements Action {
         Lifestyle lifestyle = Lifestyle.valueOf(request.getParameter("lifestyle").toUpperCase());
         LocalDate birthDate = LocalDate.parse(request.getParameter("birthDate"));
 
-        boolean isDataCorrect = checkInputData(name, login);
+        boolean isDataCorrect = checker.isInputDataCorrect(name, email, height, weight, birthDate);
 
         if (isDataCorrect) {
-            Client client = makeClient(name, login, password, height, weight, gender, lifestyle, birthDate);
+            Client client = makeClient(name, email, password, height, weight, gender, lifestyle, birthDate);
             page = registerClient(client, request, locale);
         } else {
+            setDataAttributes(request, name, email, height, weight, birthDate);
+
             request.setAttribute("errorRegistrationMessage",
                     LabelManager.getProperty("message.error.wrong.data", locale));
-            page = ConfigurationManager.getProperty("path.page.registration");
+            page = ConfigurationManager.getProperty("path.page.edit.client");
         }
 
         return page;
     }
 
-    private Client makeClient(String name, String login, String password,
+    private String getLocaleOrSetDefault(HttpServletRequest request) {
+        String locale = (String) request.getSession().getAttribute("locale");
+        if (locale == null) {
+            locale = LabelManager.DEFAULT_LOCALE;
+        }
+        return locale;
+    }
+
+    private Client makeClient(String name, String email, String password,
                               int height, int weight, Gender gender,
                               Lifestyle lifestyle, LocalDate birthDate) {
         return new Client.Builder()
@@ -72,7 +79,7 @@ public class RegisterClient implements Action {
                 .setLifestyle(lifestyle)
                 .setBirthDate(birthDate)
                 .setUser(new User.Builder()
-                        .setEmail(login)
+                        .setEmail(email)
                         .setPassword(password)
                         .build())
                 .build();
@@ -83,30 +90,28 @@ public class RegisterClient implements Action {
 
         try {
             clientsService.registerClient(client);
+
             request.setAttribute("successRegistrationMessage",
                     LabelManager.getProperty("message.success.registration", locale));
             page = ConfigurationManager.getProperty("path.page.login");
 
         } catch (BusyEmailException e) {
-            request.setAttribute("name", client.getName());
-            request.setAttribute("login", client.getUser().getEmail());
-            request.setAttribute("height", client.getHeight());
-            request.setAttribute("weight", client.getWeight());
-//            request.setAttribute("gender", client.getGender().toString());
-//            request.setAttribute("lifestyle", client.getLifestyle().toString());
-            request.setAttribute("birthDate", client.getBirthDate());
-
+            setDataAttributes(request, client.getName(), client.getUser().getEmail(), client.getHeight(),
+                    client.getWeight(), client.getBirthDate());
             request.setAttribute("errorBusyEmailMessage",
                     LabelManager.getProperty("message.error.busy.email", locale));
-
-            page = ConfigurationManager.getProperty("path.page.registration");
+            page = ConfigurationManager.getProperty("path.page.edit.client");
         }
 
         return page;
     }
 
-    private boolean checkInputData(String name, String login) {
-        return checker.isInputDataCorrect(name, login);
+    private void setDataAttributes(HttpServletRequest request,
+                                   String name, String email, int height, int weight, LocalDate birthDate) {
+        request.setAttribute("name", name);
+        request.setAttribute("email", email);
+        request.setAttribute("height", height);
+        request.setAttribute("weight", weight);
+        request.setAttribute("birthDate", birthDate);
     }
-
 }

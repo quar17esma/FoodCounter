@@ -4,19 +4,21 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LabelManager {
-    private static final Locale localeEnUs;
-    private static final Locale localeRuRu;
-    private static final ResourceBundle resourceBundleEnUs;
-    private static final ResourceBundle resourceBundleRuRu;
+    public static final String DEFAULT_LOCALE;
+    private static final Locale LOCALE_EN_US;
+    private static final Locale LOCALE_RU_RU;
+    private static final ResourceBundle RESOURCE_BUNDLE_EN_US;
+    private static final ResourceBundle RESOURCE_BUNDLE_RU_RU;
 
     private static ResourceBundle resourceBundle;
 
     static {
-        localeEnUs = new Locale("en", "US");
-        localeRuRu = new Locale("ru", "RU");
-        resourceBundleEnUs = ResourceBundle.getBundle("Labels", localeEnUs);
-        resourceBundleRuRu = ResourceBundle.getBundle("Labels", localeRuRu);
-        resourceBundle = resourceBundleEnUs;
+        DEFAULT_LOCALE = "en_US";
+        LOCALE_EN_US = new Locale("en", "US");
+        LOCALE_RU_RU = new Locale("ru", "RU");
+        RESOURCE_BUNDLE_EN_US = ResourceBundle.getBundle("Labels", LOCALE_EN_US);
+        RESOURCE_BUNDLE_RU_RU = ResourceBundle.getBundle("Labels", LOCALE_RU_RU);
+        resourceBundle = RESOURCE_BUNDLE_EN_US;
     }
 
     private LabelManager(){}
@@ -28,9 +30,9 @@ public class LabelManager {
 
     private static void setLocale(String locale) {
         switch (locale) {
-            case "en_US" : resourceBundle = resourceBundleEnUs;
+            case "en_US" : resourceBundle = RESOURCE_BUNDLE_EN_US;
             break;
-            case "ru_RU" : resourceBundle = resourceBundleRuRu;
+            case "ru_RU" : resourceBundle = RESOURCE_BUNDLE_RU_RU;
             break;
         }
     }

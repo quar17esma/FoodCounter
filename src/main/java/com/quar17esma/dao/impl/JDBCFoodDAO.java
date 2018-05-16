@@ -80,6 +80,28 @@ public class JDBCFoodDAO implements FoodDAO {
     }
 
     @Override
+    public List<Food> findBySearchInName(String searchString) {
+        List<Food> foods = new ArrayList<>();
+
+        try (PreparedStatement query = connection.prepareStatement(
+                "SELECT * FROM food WHERE food.name LIKE ?")) {
+            query.setString(1, "%" + searchString + "%");
+
+            ResultSet rs = query.executeQuery();
+            while (rs.next()) {
+                Food food = createFood(rs);
+                foods.add(food);
+            }
+
+        } catch (Exception ex) {
+            LOGGER.error("Fail to find food by search in name = " + searchString, ex);
+            throw new RuntimeException(ex);
+        }
+
+        return foods;
+    }
+
+    @Override
     public Optional<Food> findById(int id) {
 
         Optional<Food> result = Optional.empty();

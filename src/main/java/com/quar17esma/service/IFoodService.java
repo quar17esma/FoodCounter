@@ -20,4 +20,5 @@ public interface IFoodService {
 
     void updateFood(Food food);
 
+    List<Food> getFoodBySearchInName(String searchString);
 }

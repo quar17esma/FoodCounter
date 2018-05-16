@@ -74,7 +74,7 @@
         <filter-class>com.quar17esma.filter.AuthSecurityFilter</filter-class>
         <init-param>
             <param-name>ignoredUrls</param-name>
-            <param-value>/rest/change_locale,/rest/login,/rest/edit_client,/rest/register_client</param-value>
+            <param-value>/rest/change_locale,/rest/login,/rest/edit_client,/rest/add_client</param-value>
         </init-param>
     </filter>
     

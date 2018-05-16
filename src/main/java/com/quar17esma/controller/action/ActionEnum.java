@@ -16,9 +16,9 @@ public enum ActionEnum {
             this.command = new Logout();
         }
     },
-    REGISTER_CLIENT {
+    ADD_CLIENT {
         {
-            this.command = new RegisterClient();
+            this.command = new AddClient();
         }
     },
     EDIT_CLIENT {
@@ -54,6 +54,11 @@ public enum ActionEnum {
     ADD_FOOD {
         {
             this.command = new AddFood();
+        }
+    },
+    SEARCH_FOOD {
+        {
+            this.command = new SearchFood();
         }
     },
     CHANGE_LOCALE {

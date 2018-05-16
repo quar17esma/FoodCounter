@@ -10,6 +10,7 @@ import com.quar17esma.service.impl.CalorieCounter;
 import com.quar17esma.service.impl.MealService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ShowMyMeals implements Action {
@@ -30,7 +31,7 @@ public class ShowMyMeals implements Action {
     public String execute(HttpServletRequest request) {
         Client client = (Client) request.getSession().getAttribute("client");
 
-        List<Meal> meals = mealService.getMealsByClientId(client.getId());
+        List<Meal> meals = mealService.getMealsByClientIdAndDate(client.getId(), LocalDate.now());
         int calories = calorieCounter.countCalorie(client);
         int caloriesLeft = calorieCounter.countLeftCalories(client);
 
