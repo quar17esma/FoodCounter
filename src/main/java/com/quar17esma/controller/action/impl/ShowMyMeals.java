@@ -32,8 +32,8 @@ public class ShowMyMeals implements Action {
         Client client = (Client) request.getSession().getAttribute("client");
 
         List<Meal> meals = mealService.getMealsByClientIdAndDate(client.getId(), LocalDate.now());
-        int calories = calorieCounter.countCalorie(client);
-        int caloriesLeft = calorieCounter.countLeftCalories(client);
+        int calories = calorieCounter.countDailyCalorieNeed(client);
+        int caloriesLeft = calorieCounter.countTodayLeftCalories(client);
 
         request.setAttribute("meals", meals);
         request.setAttribute("calories", calories);
