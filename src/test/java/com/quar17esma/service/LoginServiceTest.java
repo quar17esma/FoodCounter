@@ -58,8 +58,6 @@ public class LoginServiceTest {
 
         when(user.getPassword()).thenReturn(password);
         when(userDAO.findByEmail(login)).thenReturn(Optional.of(user));
-        when(connectionPool.getConnection()).thenReturn(connection);
-        when(factory.createUserDAO(any(Connection.class))).thenReturn(userDAO);
 
         loginService.login(login, password);
 
@@ -76,8 +74,6 @@ public class LoginServiceTest {
 
         when(user.getPassword()).thenReturn(password);
         when(userDAO.findByEmail(login)).thenReturn(Optional.of(user));
-        when(connectionPool.getConnection()).thenReturn(connection);
-        when(factory.createUserDAO(any(Connection.class))).thenReturn(userDAO);
 
         loginService.login(login, password);
 
@@ -94,8 +90,6 @@ public class LoginServiceTest {
 
         when(user.getPassword()).thenReturn(password);
         when(userDAO.findByEmail(login)).thenReturn(Optional.of(user));
-        when(connectionPool.getConnection()).thenReturn(connection);
-        when(factory.createUserDAO(any(Connection.class))).thenReturn(userDAO);
 
         loginService.login(login, password);
 
@@ -112,8 +106,6 @@ public class LoginServiceTest {
 
         when(user.getPassword()).thenReturn(password);
         when(userDAO.findByEmail(login)).thenReturn(Optional.of(user));
-        when(connectionPool.getConnection()).thenReturn(connection);
-        when(factory.createUserDAO(any(Connection.class))).thenReturn(userDAO);
 
         loginService.login(login, password);
 
@@ -130,8 +122,6 @@ public class LoginServiceTest {
 
         when(user.getPassword()).thenReturn(password);
         when(userDAO.findByEmail(login)).thenReturn(Optional.of(user));
-        when(connectionPool.getConnection()).thenReturn(connection);
-        when(factory.createUserDAO(any(Connection.class))).thenReturn(userDAO);
 
         loginService.login(login, password);
 
