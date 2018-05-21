@@ -9,4 +9,14 @@ public abstract class InputDataChecker {
         Matcher matcher = pattern.matcher(string);
         return matcher.matches();
     }
+
+    protected boolean isIntInRange(int number, int min, int max) {
+        boolean result = false;
+
+        if (number >= min && number <= max) {
+            result = true;
+        }
+
+        return result;
+    }
 }

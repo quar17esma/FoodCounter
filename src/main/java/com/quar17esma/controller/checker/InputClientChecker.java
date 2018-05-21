@@ -1,8 +1,5 @@
 package com.quar17esma.controller.checker;
 
-import com.quar17esma.enums.Gender;
-import com.quar17esma.enums.Lifestyle;
-
 import java.time.LocalDate;
 
 public class InputClientChecker extends InputDataChecker {
@@ -47,23 +44,13 @@ public class InputClientChecker extends InputDataChecker {
     }
 
     private boolean isHeightCorrect(int height) {
-        boolean result = false;
 
-        if (height >= HEIGHT_MIN && height <= HEIGHT_MAX) {
-            result = true;
-        }
-
-        return result;
+        return isIntInRange(height, HEIGHT_MIN, HEIGHT_MAX);
     }
 
     private boolean isWeightCorrect(int weight) {
-        boolean result = false;
 
-        if (weight >= WEIGHT_MIN && weight <= WEIGHT_MAX) {
-            result = true;
-        }
-
-        return result;
+        return isIntInRange(weight, WEIGHT_MIN, WEIGHT_MAX);
     }
 
     private boolean isBirthDateCorrect(LocalDate birthDate) {
