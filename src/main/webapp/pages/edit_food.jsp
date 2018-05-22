@@ -22,27 +22,33 @@
             <input type="hidden" name="foodId" value="${food.id}">
         </c:if>
 
-        <label><fmt:message key="label.name"/></label>
+        <label><fmt:message key="label.food.name"/></label>
         <br/>
         <input type="text" name="name" value="${food.name}" required="required"/>
         <br/>
+        <br/>
+
+        <b><fmt:message key="label.per.100.gram"/></b><br>
 
         <label><fmt:message key="label.carbs"/></label>
         <br/>
         <input type="number" name="carbs" min="0" step="1" value="${food.carbs}"
                required="required">
+        <fmt:message key="label.gram"/>
         <br/>
 
         <label><fmt:message key="label.protein"/></label>
         <br/>
         <input type="number" name="protein" min="0" step="1" value="${food.protein}"
                required="required">
+        <fmt:message key="label.gram"/>
         <br/>
 
         <label><fmt:message key="label.fat"/></label>
         <br/>
         <input type="number" name="fat" min="0" step="1" value="${food.fat}"
                required="required">
+        <fmt:message key="label.gram"/>
         <br/>
 
         <label><fmt:message key="label.kcal"/></label>
@@ -52,8 +58,8 @@
         <br/>
 
         <br/>
-        <fmt:message var="buttonConfirm" key="button.confirm"/>
-        <input type="submit" value="${buttonConfirm}"/>
+        <fmt:message var="buttonAddFood" key="button.add.food"/>
+        <input type="submit" value="${buttonAddFood}"/>
     </form>
 </div>
 

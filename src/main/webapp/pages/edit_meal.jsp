@@ -20,6 +20,8 @@
             <b><c:out value="${food.name}"/></b>
         </div>
         <div class="field">
+            <i><fmt:message key="label.per.100.gram"/></i>
+            <br>
             <label><fmt:message key="label.carbs"/></label>
             <c:out value="${food.carbs}"/>
             <label><fmt:message key="label.protein"/></label>
@@ -36,6 +38,9 @@
             <input type="hidden" name="foodId" value="${food.id}">
             <input type="number" min="0" step="10" name="gram" value="${meal.gram}"
                    required="required">
+            <fmt:message key="label.gram"/>
+            <br>
+            <br>
 
             <fmt:message var="buttonAddMeal" key="button.add.meal"/>
             <input class="button" type="submit" value="${buttonAddMeal}">

@@ -24,6 +24,7 @@
         <fmt:message var="buttonRus" key="button.russian"/>
         <input type="submit" value="${buttonRus}">
     </form>
+    <br>
 </div>
 
 <div>
