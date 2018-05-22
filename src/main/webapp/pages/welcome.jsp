@@ -16,6 +16,11 @@
 <jsp:include page="/pages/header.jsp"/>
 
 <div>
+    <c:out value="${successAddFoodMessage}"/>
+    <c:out value="${successAddMeal}"/>
+</div>
+
+<div>
     <fmt:message key="message.welcome"/>
 </div>
 

@@ -36,22 +36,15 @@ public class AddMeal implements Action {
     @Override
     public String execute(HttpServletRequest request) {
         String locale = (String) request.getSession().getAttribute("locale");
+        Client client = (Client) request.getSession().getAttribute("client");
 
         int gram = Integer.parseInt(request.getParameter("gram"));
         int foodId = Integer.parseInt(request.getParameter("foodId"));
         Food food = foodService.getFoodById(foodId);
-        Client client = (Client) request.getSession().getAttribute("client");
 
         int mealCalories = calorieCounter.countMealKcal(gram, food.getKcal());
-
-        mealService.addMeal(new Meal.Builder()
-                .setFood(food)
-                .setClient(client)
-                .setGram(gram)
-                .setKcal(mealCalories)
-                .setMealDate(LocalDate.now())
-                .build()
-        );
+        Meal meal = makeMeal(gram, food, client, mealCalories);
+        mealService.addMeal(meal);
 
         request.setAttribute("successAddMeal",
                 LabelManager.getProperty("message.success.add.meal", locale));
@@ -59,4 +52,13 @@ public class AddMeal implements Action {
         return ConfigurationManager.getProperty("path.page.welcome");
     }
 
+    private Meal makeMeal(int gram, Food food, Client client, int mealCalories) {
+        return new Meal.Builder()
+                .setFood(food)
+                .setClient(client)
+                .setGram(gram)
+                .setKcal(mealCalories)
+                .setMealDate(LocalDate.now())
+                .build();
+    }
 }
