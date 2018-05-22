@@ -30,7 +30,8 @@ public class InputClientChecker extends InputDataChecker {
             return false;
         }
 
-        return isMatches(CheckPatterns.NAME, name) &&
+        return (isMatches(CheckPatterns.NAME_EN, name) ||
+                isMatches(CheckPatterns.NAME_RU, name)) &&
                 name.length() <= NAME_LENGTH_MAX;
     }
 

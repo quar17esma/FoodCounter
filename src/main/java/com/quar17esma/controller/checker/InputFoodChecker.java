@@ -7,14 +7,14 @@ public class InputFoodChecker extends InputDataChecker {
     private static final int FAT_MIN = 0;
     private static final int KCAL_MIN = 0;
 
-    public boolean isInputDataCorrect(String name, int carbs, int protein, int fat, int kcal) {
+    public boolean isInputDataCorrect(String foodName, int carbs, int protein, int fat, int kcal) {
 
-        if (name == null || name.isEmpty()) {
+        if (foodName == null || foodName.isEmpty()) {
             return false;
         }
 
-        return isMatches(CheckPatterns.CHAR_DIGIT_PUNCT, name) &&
-                name.length() <= NAME_LENGTH_MAX &&
+        return isMatches(CheckPatterns.CHAR_DIGIT_PUNCT_EN_RU, foodName) &&
+                foodName.length() <= NAME_LENGTH_MAX &&
                 carbs >= CARBS_MIN &&
                 protein >= PROTEIN_MIN &&
                 fat >= FAT_MIN &&
