@@ -42,6 +42,8 @@
                 <b><c:out value="${food.name}"/></b>
             </div>
             <div class="field">
+                <i><fmt:message key="label.per.100.gram"/></i>
+                <br>
                 <label><fmt:message key="label.carbs"/></label>
                 <c:out value="${food.carbs}"/>
                 <label><fmt:message key="label.protein"/></label>
