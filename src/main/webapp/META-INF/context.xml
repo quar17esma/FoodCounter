@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/FoodCounter">
+<Context path="/">
     <WatchedResource>WEB-INF/web.xml</WatchedResource>
     <Resource
             name="jdbc/food_counter"
@@ -7,7 +7,7 @@
             type="javax.sql.DataSource"
             factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
             maximumPoolSize="10"
-            connectionTimeout="300000"
+            connectionTimeout="30000"
             maxWait="10000"
             username="root"
             password="root"
