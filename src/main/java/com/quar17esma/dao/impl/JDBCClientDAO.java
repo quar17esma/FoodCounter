@@ -16,6 +16,28 @@ import java.util.Optional;
 public class JDBCClientDAO implements ClientDAO {
     private static final Logger LOGGER = Logger.getLogger(JDBCClientDAO.class);
 
+    private static final String FIND_ALL_QUERY =
+            "SELECT * FROM client " +
+                    "JOIN user ON client.id = user.id ";
+
+    private static final String FIND_BY_ID_QUERY =
+            "SELECT * FROM client " +
+                    "JOIN user ON client.id = user.id " +
+                    "WHERE client.id = ?";
+
+    private static final String UPDATE_QUERY =
+            "UPDATE client " +
+                    "SET name = ?, birth_date = ?, height = ?, weight = ?, gender = ?, lifestyle = ? " +
+                    "WHERE id = ?";
+
+    private static final String DELETE_QUERY =
+            "DELETE FROM client " +
+                    "WHERE id = ?";
+
+    private static final String INSERT_QUERY =
+            "INSERT INTO client (id, name, birth_date, height, weight, gender, lifestyle) " +
+                    "VALUES(?, ?, ?, ?, ?, ?, ?)";
+
     private Connection connection;
 
     public JDBCClientDAO(Connection connection) {
@@ -26,9 +48,7 @@ public class JDBCClientDAO implements ClientDAO {
     public List<Client> findAll() {
         List<Client> clients = new ArrayList<>();
 
-        try (PreparedStatement query = connection.prepareStatement(
-                "SELECT * FROM client " +
-                        "JOIN user ON client.id = user.id ")) {
+        try (PreparedStatement query = connection.prepareStatement(FIND_ALL_QUERY)) {
             ResultSet rs = query.executeQuery();
 
             while (rs.next()) {
@@ -47,10 +67,7 @@ public class JDBCClientDAO implements ClientDAO {
 
         Optional<Client> result = Optional.empty();
 
-        try (PreparedStatement query = connection.prepareStatement(
-                "SELECT * FROM client " +
-                        "JOIN user ON client.id = user.id " +
-                        "WHERE client.id = ?")) {
+        try (PreparedStatement query = connection.prepareStatement(FIND_BY_ID_QUERY)) {
             query.setInt(1, id);
             ResultSet rs = query.executeQuery();
 
@@ -91,10 +108,7 @@ public class JDBCClientDAO implements ClientDAO {
         boolean result = false;
 
         try (PreparedStatement query =
-                     connection.prepareStatement(
-                             "UPDATE client " +
-                                     "SET name = ?, birth_date = ?, height = ?, weight = ?, gender = ?, lifestyle = ? " +
-                                     "WHERE id = ?")) {
+                     connection.prepareStatement(UPDATE_QUERY)) {
             query.setString(1, client.getName());
             query.setDate(2, Date.valueOf(client.getBirthDate()));
             query.setInt(3, client.getHeight());
@@ -119,9 +133,7 @@ public class JDBCClientDAO implements ClientDAO {
         boolean result = false;
 
         try (PreparedStatement query =
-                     connection.prepareStatement(
-                             "DELETE FROM client " +
-                                     "WHERE id = ?")) {
+                     connection.prepareStatement(DELETE_QUERY)) {
             query.setInt(1, id);
             query.executeUpdate();
 
@@ -139,10 +151,7 @@ public class JDBCClientDAO implements ClientDAO {
         int result = -1;
 
         try (PreparedStatement query =
-                     connection.prepareStatement(
-                             "INSERT INTO client (id, name, birth_date, height, weight, gender, lifestyle) " +
-                                     "VALUES(?, ?, ?, ?, ?, ?, ?)",
-                             Statement.RETURN_GENERATED_KEYS)) {
+                     connection.prepareStatement(INSERT_QUERY, Statement.RETURN_GENERATED_KEYS)) {
             query.setInt(1, client.getId());
             query.setString(2, client.getName());
             query.setDate(3, Date.valueOf(client.getBirthDate()));

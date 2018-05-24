@@ -24,7 +24,7 @@ public class AddMeal implements Action {
     public AddMeal() {
         this.mealService = MealService.getInstance();
         this.foodService = FoodService.getInstance();
-        this.calorieCounter = CalorieCounter.getInstance();
+        this.calorieCounter = new CalorieCounter();
     }
 
     public AddMeal(IMealService mealService, IFoodService foodService, ICalorieCounter calorieCounter) {

@@ -19,7 +19,7 @@ public class ShowMyMeals implements Action {
 
     public ShowMyMeals() {
         this.mealService = MealService.getInstance();
-        this.calorieCounter = CalorieCounter.getInstance();
+        this.calorieCounter = new CalorieCounter();
     }
 
     public ShowMyMeals(IMealService mealService, ICalorieCounter calorieCounter) {

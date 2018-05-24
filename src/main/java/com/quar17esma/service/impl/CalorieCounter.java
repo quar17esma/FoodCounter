@@ -29,15 +29,6 @@ public class CalorieCounter implements ICalorieCounter {
         this.mealService = mealService;
     }
 
-    private static class Holder {
-        private static CalorieCounter INSTANCE = new CalorieCounter();
-    }
-
-    public static CalorieCounter getInstance() {
-        return CalorieCounter.Holder.INSTANCE;
-    }
-
-
     @Override
     public int countDailyCalorieNeed(Client client) {
         int result = 0;
